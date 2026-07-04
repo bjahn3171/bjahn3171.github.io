@@ -1,42 +1,73 @@
+/* ===============================
+   Compact search / filter UI
+   =============================== */
+
+/* 전체 게시글 / 논문리뷰 페이지용 검색 패널 */
+
 .post-filter-panel {
-  margin: 0.25rem 0 1.15rem 0;
-  padding: 0.95rem 1rem;
-  border: 1px solid #dfe9ec;
-  border-radius: 18px;
-  background:
-    linear-gradient(135deg, rgba(47, 127, 143, 0.075), rgba(255, 255, 255, 0.95)),
-    #ffffff;
-  box-shadow: 0 10px 28px rgba(47, 127, 143, 0.08);
+  margin: 0.2rem 0 1.35rem 0;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid #e0eaed;
+  border-radius: 12px;
+  background: #fbfdfe;
 }
 
-.post-filter-panel__top {
+.post-filter-toolbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.55rem;
+  gap: 0.55rem;
 }
 
-.post-filter-panel__label {
-  color: #6b767d;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+.post-filter-search {
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 2.35rem;
+  padding: 0 0.75rem;
+  border: 1px solid #d6e2e6;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.post-filter-search:focus-within {
+  border-color: rgba(47, 127, 143, 0.55);
+  box-shadow: 0 0 0 3px rgba(47, 127, 143, 0.10);
+}
+
+.post-filter-search__icon {
+  margin-right: 0.5rem;
+  color: #8a969e;
+  font-size: 0.78rem;
+}
+
+.post-filter-input {
+  width: 100%;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #46515a;
+  font-size: 0.84rem;
+  line-height: 1.4;
+}
+
+.post-filter-input::placeholder {
+  color: #a3adb5;
 }
 
 .post-filter-clear {
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 0.25rem 0.55rem;
+  flex: 0 0 auto;
+  height: 2.35rem;
+  padding: 0 0.8rem;
   border: 1px solid #d6e2e6;
-  border-radius: 999px;
+  border-radius: 8px;
   background: #ffffff;
   color: #6a747c;
-  font-size: 0.68rem;
+  font-size: 0.76rem;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.16s ease;
+  transition: all 0.15s ease;
 }
 
 .post-filter-clear:hover {
@@ -45,57 +76,106 @@
   background: #f3fbfc;
 }
 
-.post-filter-search {
+.selected-tag-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  min-height: 1.65rem;
+  margin-top: 0.5rem;
+}
+
+.selected-tag-row__label {
+  flex: 0 0 auto;
+  padding-top: 0.25rem;
+  color: #8a949b;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+/* 사이드바 태그 클릭 페이지용 현재 필터 바 */
+
+.current-filter-bar {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 0.45rem;
-  min-height: 3rem;
-  padding: 0.35rem 0.55rem;
-  border: 1px solid #d7e3e7;
+  margin: 0.1rem 0 1.4rem 0;
+  padding: 0.55rem 0.65rem;
+  border-left: 4px solid var(--bj-accent);
+  border-radius: 10px;
+  background: #f8fbfc;
+  border-top: 1px solid #e2ecef;
+  border-right: 1px solid #e2ecef;
+  border-bottom: 1px solid #e2ecef;
+}
+
+.current-filter-bar__label {
+  flex: 0 0 auto;
+  color: #6f7a82;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.current-filter-clear {
+  margin-left: auto;
+  padding: 0.28rem 0.62rem;
+  border: 1px solid #d6e2e6;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.92);
+  background: #ffffff;
+  color: #6a747c;
+  font-size: 0.7rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
 }
 
-.post-filter-search:focus-within {
-  border-color: rgba(47, 127, 143, 0.55);
-  box-shadow: 0 0 0 3px rgba(47, 127, 143, 0.11);
+.current-filter-clear:hover {
+  border-color: var(--bj-accent);
+  color: var(--bj-accent);
+  background: #f3fbfc;
 }
 
-.post-filter-search__icon {
-  margin-left: 0.25rem;
-  color: #8a969e;
-  font-size: 0.82rem;
-}
+/* 선택된 태그 chip */
 
 .selected-tag-box {
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem;
+  min-width: 0;
 }
 
 .selected-tag-chip {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  max-width: 100%;
-  padding: 0.34rem 0.42rem 0.34rem 0.68rem;
+  padding: 0.28rem 0.38rem 0.28rem 0.62rem;
   border: 1px solid rgba(47, 127, 143, 0.24);
   border-radius: 999px;
-  background: linear-gradient(180deg, #edf9fb, #f8fdfe);
+  background: #eef9fb;
   color: #2a7481;
-  font-size: 0.76rem;
+  font-size: 0.72rem;
   font-weight: 700;
   line-height: 1.1;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(47, 127, 143, 0.08);
-  transition: all 0.16s ease;
+  transition: all 0.15s ease;
 }
 
 .selected-tag-chip:hover {
-  transform: translateY(-1px);
   border-color: rgba(47, 127, 143, 0.48);
-  box-shadow: 0 5px 14px rgba(47, 127, 143, 0.15);
+  background: #e4f5f8;
+}
+
+.selected-tag-chip.is-locked {
+  padding-right: 0.62rem;
+  cursor: default;
+  background: #e9f7fa;
+  border-color: rgba(47, 127, 143, 0.34);
+}
+
+.selected-tag-chip.is-locked:hover {
+  background: #e9f7fa;
+  border-color: rgba(47, 127, 143, 0.34);
 }
 
 .selected-tag-chip__text {
@@ -106,48 +186,43 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1.05rem;
-  height: 1.05rem;
+  width: 0.95rem;
+  height: 0.95rem;
   border-radius: 50%;
   background: rgba(47, 127, 143, 0.13);
   color: #2a7481;
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   line-height: 1;
 }
 
-.post-filter-input {
-  flex: 1 1 180px;
-  min-width: 130px;
-  border: none;
-  outline: none;
-  background: transparent;
-  color: #46515a;
-  font-size: 0.88rem;
-  line-height: 1.5;
-}
+/* 전체 페이지에서 선택 태그가 없을 때 */
 
-.post-filter-input::placeholder {
-  color: #a3adb5;
-}
-
-.post-filter-hint {
-  margin-top: 0.5rem;
-  color: #8a949b;
+.selected-tag-box:empty::after {
+  content: "없음";
+  color: #b1bbc2;
   font-size: 0.72rem;
-  line-height: 1.45;
+  padding-top: 0.25rem;
 }
 
 @media (max-width: 600px) {
-  .post-filter-panel {
-    padding: 0.75rem;
-    border-radius: 14px;
+  .post-filter-toolbar {
+    align-items: stretch;
   }
 
-  .post-filter-search {
-    border-radius: 14px;
+  .post-filter-clear {
+    padding: 0 0.65rem;
   }
 
-  .post-filter-hint {
-    display: none;
+  .selected-tag-row {
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .selected-tag-row__label {
+    padding-top: 0;
+  }
+
+  .current-filter-clear {
+    margin-left: 0;
   }
 }
