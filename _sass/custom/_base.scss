@@ -50,9 +50,8 @@ a:hover,
   #main {
     max-width: 1560px !important;
   }
-}
 
-@media (min-width: 1024px) {
+  /* Post page: keep TOC, but give more width to content */
   .layout--single .page {
     padding-right: 200px !important;
   }
@@ -60,5 +59,13 @@ a:hover,
   .layout--single .sidebar__right {
     width: 200px !important;
     margin-right: -200px !important;
+  }
+
+  /* Archive / list pages */
+  .layout--archive .archive,
+  .layout--home .archive,
+  .layout--categories .archive,
+  .layout--tags .archive {
+    padding-right: 0 !important;
   }
 }
