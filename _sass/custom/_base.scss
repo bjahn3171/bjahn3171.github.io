@@ -69,3 +69,32 @@ a:hover,
     padding-right: 0 !important;
   }
 }
+
+.layout--single .page__content h2 {
+  margin-top: 2.1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid #eeeeee;
+  color: #4f565c;
+  font-size: 1.18rem;
+  line-height: 1.35;
+  font-weight: 800;
+}
+
+.layout--single .page__content h3 {
+  margin-top: 1.6rem;
+  margin-bottom: 0.65rem;
+  color: #4f565c;
+  font-size: 0.98rem;
+  line-height: 1.4;
+  font-weight: 800;
+}
+
+.layout--single .page__content h4 {
+  margin-top: 1.2rem;
+  margin-bottom: 0.45rem;
+  color: #4f565c;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  font-weight: 700;
+}
