@@ -1,3 +1,41 @@
+---
+title: "[논문리뷰] END-TO-END OPTIMIZED IMAGE COMPRESSION"
+summary: "End-to-End Optimized Image Compression 논문 리뷰 (ICLR 2017)"
+excerpt: "End-to-End Optimized Image Compression 논문 리뷰 (ICLR 2017)"
+date: 2026-07-04
+last_modified_at: 2026-07-04
+
+categories:
+  - 논문리뷰
+
+tags:
+  - Video Coding
+  - Image Compression
+  - DeepLearning
+  - ICLR
+
+layout: single
+author_profile: true
+toc: true
+toc_sticky: true
+comments: false
+
+paper:
+  title: "END-TO-END OPTIMIZED IMAGE COMPRESSION"
+  venue: "ICLR"
+  year: "2017"
+  date: "24 Feb 2017"
+  authors: "Johannes Ballé, Valero Laparra, Eero P. Simoncelli"
+  affiliations: "Google | New York University"
+  links:
+    - name: "Paper"
+      url: "https://arxiv.org/abs/1611.01704"
+    - name: "Github"
+      url: ""
+    - name: "Project"
+      url: ""
+---
+
 {% include paper-info.html %}
 
 ## 0. 한 줄 요약
@@ -78,3 +116,119 @@ Image
 → quantization
 → entropy coding
 → reconstruction
+```
+
+이 논문은 이를 다음과 같은 학습 기반 구조로 바꾼다.
+
+```text
+Image
+→ nonlinear analysis transform
+→ uniform quantization
+→ nonlinear synthesis transform
+→ reconstructed image
+```
+
+이때 rate는 압축된 표현의 entropy로, distortion은 원본과 복원 이미지 사이의 오차로 정의된다.
+
+---
+
+## 4. Method
+
+### 4.1 Overall Pipeline
+
+전체 구조는 다음과 같다.
+
+1. 입력 이미지 `x`를 analysis transform으로 latent representation `y`로 변환한다.
+2. `y`를 uniform quantization하여 이산 표현 `ŷ`를 얻는다.
+3. `ŷ`를 synthesis transform에 넣어 복원 이미지 `x̂`를 생성한다.
+4. rate와 distortion을 함께 고려하는 목적함수로 전체 모델을 학습한다.
+
+### 4.2 Main Components
+
+| Component | Role |
+|---|---|
+| Analysis transform | 입력 이미지를 압축에 적합한 latent representation으로 변환 |
+| Uniform quantizer | 연속 latent 값을 이산값으로 양자화 |
+| Synthesis transform | 양자화된 latent representation으로부터 이미지를 복원 |
+| GDN nonlinearity | local gain control 기반의 비선형 변환 |
+| Rate–distortion loss | bitrate와 reconstruction quality 사이의 trade-off 최적화 |
+
+### 4.3 Quantization Relaxation
+
+양자화는 본질적으로 미분 불가능한 연산이다. 따라서 일반적인 backpropagation으로는 직접 학습하기 어렵다.
+
+논문에서는 학습 과정에서 양자화로 인해 생기는 discontinuous loss를 연속적인 proxy로 완화한다. 이를 통해 stochastic gradient descent 기반으로 전체 압축 모델을 학습할 수 있게 한다.
+
+---
+
+## 5. Experiments / Analysis
+
+### 5.1 Experimental Setup
+
+| 항목 | 내용 |
+|---|---|
+| Task | Lossy image compression |
+| Baselines | JPEG, JPEG 2000 |
+| Metric | Rate–distortion performance, MS-SSIM |
+| Main comparison | bitrate 대비 복원 품질 |
+
+### 5.2 Main Results
+
+논문은 제안 방법이 JPEG 및 JPEG 2000보다 전반적으로 더 좋은 rate–distortion 성능을 보인다고 보고한다. 특히 낮은 bitrate에서 시각적 품질 향상이 두드러진다.
+
+이는 학습 기반 변환이 사람이 설계한 고정 변환보다 이미지 통계에 더 잘 적응할 수 있음을 보여준다.
+
+### 5.3 Additional Observations
+
+이 논문에서 중요한 관찰은 단순한 픽셀 단위 오차뿐 아니라, MS-SSIM과 같은 perceptual quality 지표에서도 개선이 나타난다는 점이다. 즉, 제안 방법은 수치적 distortion뿐 아니라 사람이 보기에 더 자연스러운 복원을 목표로 한다.
+
+---
+
+## 6. Discussion
+
+### 6.1 장점
+
+1. 이미지 압축 전체 과정을 end-to-end로 최적화한다.
+2. 양자화 문제를 연속적인 relaxation으로 다루어 학습 가능하게 만든다.
+3. GDN 비선형성을 사용해 압축에 적합한 representation을 학습한다.
+4. JPEG, JPEG 2000과 비교하여 우수한 rate–distortion 성능을 보인다.
+
+### 6.2 한계 및 의문점
+
+1. entropy model이 이후 neural compression 연구들에 비해 상대적으로 단순하다.
+2. 실제 codec 시스템 관점에서는 entropy coding, runtime, model size까지 함께 고려할 필요가 있다.
+3. 학습 데이터 분포와 다른 이미지에 대해 얼마나 일반화되는지는 추가적으로 볼 필요가 있다.
+
+---
+
+## 7. Takeaway
+
+이 논문은 neural image compression의 초기 핵심 논문 중 하나로 볼 수 있다.  
+가장 중요한 포인트는 압축 과정을 사람이 설계한 모듈의 조합이 아니라, **rate–distortion objective로 직접 학습되는 end-to-end optimization 문제**로 정식화했다는 점이다.
+
+내가 가져갈 점은 다음과 같다.
+
+- 손실 압축에서는 rate와 distortion을 동시에 고려해야 한다.
+- 양자화는 미분 불가능하므로 학습을 위해 relaxation 또는 proxy가 필요하다.
+- transform coding 구조는 neural network 기반으로도 자연스럽게 확장될 수 있다.
+- 이후 hyperprior, autoregressive entropy model, VAE 기반 compression 연구의 출발점으로 이해할 수 있다.
+
+---
+
+## 8. 용어 정리
+
+| 용어 | 의미 |
+|---|---|
+| Analysis transform | 입력 이미지를 latent representation으로 변환하는 인코더 |
+| Synthesis transform | latent representation으로부터 이미지를 복원하는 디코더 |
+| Uniform quantization | 연속값을 일정 간격의 이산값으로 변환하는 양자화 방식 |
+| Rate–distortion optimization | bitrate와 복원 오차 사이의 trade-off를 최적화하는 문제 |
+| GDN | Generalized Divisive Normalization, local gain control 형태의 비선형성 |
+| MS-SSIM | 이미지 구조적 유사도를 평가하는 perceptual quality metric |
+
+---
+
+## 9. 최종 정리
+
+이 논문은 이미지 압축을 end-to-end 학습 가능한 비선형 transform coding 문제로 정식화한 연구이다.  
+분석 변환, 양자화, 합성 변환을 하나의 모델로 묶고, rate–distortion objective를 통해 직접 최적화한다는 점에서 이후 neural image compression 연구의 기반이 된다.
