@@ -1,41 +1,3 @@
----
-title: "[논문리뷰] END-TO-END OPTIMIZED IMAGE COMPRESSION"
-summary: "End-to-End Optimized Image Compression 논문 리뷰 (ICLR 2017)"
-excerpt: "End-to-End Optimized Image Compression 논문 리뷰 (ICLR 2017)"
-date: 2026-07-04
-last_modified_at: 2026-07-04
-
-categories:
-  - 논문리뷰
-
-tags:
-  - Video Coding
-  - Image Compression
-  - DeepLearning
-  - ICLR
-
-layout: single
-author_profile: true
-toc: true
-toc_sticky: true
-comments: false
-
-paper:
-  title: "END-TO-END OPTIMIZED IMAGE COMPRESSION"
-  venue: "ICLR"
-  year: "2017"
-  date: "24 Feb 2017"
-  authors: "Johannes Ballé, Valero Laparra, Eero P. Simoncelli"
-  affiliations: "Google | New York University"
-  links:
-    - name: "Paper"
-      url: "https://arxiv.org/abs/1611.01704"
-    - name: "Github"
-      url: ""
-    - name: "Project"
-      url: ""
----
-
 {% include paper-info.html %}
 
 ## 0. 한 줄 요약
@@ -43,7 +5,7 @@ paper:
 <div class="paper-summary-box" markdown="1">
 
 **TL;DR.**  
-이 논문은 neural image compression을 end-to-end로 최적화하여 기존 hand-crafted image codec과 경쟁하는 학습 기반 압축 방법을 제안한다.
+이 논문은 CNN 기반 비선형 변환, 양자화, 복원 변환을 하나의 rate–distortion 목적함수로 end-to-end 최적화하여 기존 JPEG/JPEG 2000보다 우수한 압축 성능을 얻는 학습 기반 이미지 압축 방법을 제안한다.
 
 </div>
 
@@ -79,12 +41,40 @@ using MS-SSIM.
 
 ### 1.2 한국어 요약
 
-이 논문은 CNN 기반의 비선형 변환과 GDN 비선형성을 사용해 이미지 압축 모델을 end-to-end로 학습하는 방법을 제안한다. 
-양자화 때문에 직접 학습이 어려운 문제는 연속적인 근사 손실 함수로 해결하고, rate–distortion 기준으로 전체 모델을 최적화한다. 
-실험 결과, 제안 방법은 JPEG 및 JPEG 2000보다 우수한 압축 성능을 보였으며, 특히 낮은 비트레이트에서도 시각적 품질이 크게 향상되었다.
+이 논문은 CNN 기반의 비선형 분석 변환, 균일 양자화, 비선형 합성 변환으로 구성된 학습 기반 이미지 압축 모델을 제안한다.  
+양자화는 미분 불가능하기 때문에 직접적인 gradient 기반 학습이 어렵지만, 논문에서는 이를 연속적인 근사 손실 함수로 대체하여 전체 압축 모델을 rate–distortion 기준으로 end-to-end 최적화한다.
+
+또한 일반적인 CNN 활성화 함수 대신, 생물학적 시각 모델에서 영감을 받은 local gain control 형태의 GDN 비선형성을 사용한다. 실험 결과, 제안 방법은 JPEG 및 JPEG 2000보다 우수한 rate–distortion 성능을 보였고, 특히 낮은 비트레이트에서 시각적 품질이 크게 개선되었다.
+
+### 1.3 핵심 요약
+
+- **핵심 문제:** 양자화가 포함된 이미지 압축 과정을 어떻게 end-to-end로 학습할 수 있는가?
+- **핵심 방법:** 분석 변환, 양자화, 합성 변환을 rate–distortion objective로 공동 최적화한다.
+- **핵심 결과:** JPEG, JPEG 2000보다 좋은 압축 성능과 시각적 품질을 보였다.
 
 ---
 
-## 2. 문제의식
+## 2. 서론 / 배경
 
-기존 이미지 압축 방식은 transform, quantization, entropy coding 등을 사람이 설계한 규칙에 의존한다. 이 논문은 전체 압축 과정을 rate-distortion 관점에서 직접 최적화하려는 문제의식에서 출발한다.
+기존 이미지 압축 방식은 transform, quantization, entropy coding과 같은 구성 요소를 사람이 설계한 규칙에 의존해 왔다. JPEG나 JPEG 2000 역시 각각 DCT, wavelet transform과 같은 hand-crafted 변환을 기반으로 한다.
+
+이 논문은 이러한 전통적인 압축 파이프라인을 학습 가능한 모델로 대체하려는 흐름에 있다. 즉, 이미지를 latent representation으로 변환하고, 이를 양자화한 뒤 다시 복원하는 전체 과정을 하나의 rate–distortion 최적화 문제로 다룬다.
+
+이 논문에서 중요한 점은 단순히 neural network를 압축에 적용했다는 것이 아니라, **양자화로 인해 학습이 어려운 손실 압축 문제를 연속적인 proxy objective로 완화하여 end-to-end 학습 가능하게 만들었다는 점**이다.
+
+---
+
+## 3. 핵심 아이디어
+
+이 논문의 핵심 아이디어는 다음과 같다.
+
+> 이미지 압축을 분석 변환, 양자화, 합성 변환으로 구성된 학습 가능한 비선형 autoencoder 구조로 보고, 전체 모델을 rate–distortion 관점에서 직접 최적화한다.
+
+기존 방식은 대체로 다음과 같다.
+
+```text
+Image
+→ hand-crafted transform
+→ quantization
+→ entropy coding
+→ reconstruction
