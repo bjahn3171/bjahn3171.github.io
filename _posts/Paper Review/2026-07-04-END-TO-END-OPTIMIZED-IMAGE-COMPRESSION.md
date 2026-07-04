@@ -56,13 +56,32 @@ paper:
 <details markdown="1">
 <summary><strong>Original Abstract 보기</strong></summary>
 
-> 여기에 abstract 원문 또는 필요한 부분을 넣는다.
+> We describe an image compression method, consisting of a nonlinear analysis
+transformation, a uniform quantizer, and a nonlinear synthesis transformation.
+The transforms are constructed in three successive stages of convolutional linear
+filters and nonlinear activation functions. Unlike most convolutional neural networks,
+the joint nonlinearity is chosen to implement a form of local gain control,
+inspired by those used to model biological neurons. Using a variant of stochastic
+gradient descent, we jointly optimize the entire model for rate–distortion performance
+over a database of training images, introducing a continuous proxy for the
+discontinuous loss function arising from the quantizer. Under certain conditions,
+the relaxed loss function may be interpreted as the log likelihood of a generative
+model, as implemented by a variational autoencoder. Unlike these models,
+however, the compression model must operate at any given point along the rate–
+distortion curve, as specified by a trade-off parameter. Across an independent
+set of test images, we find that the optimized method generally exhibits better
+rate–distortion performance than the standard JPEG and JPEG 2000 compression
+methods. More importantly, we observe a dramatic improvement in visual quality
+for all images at all bit rates, which is supported by objective quality estimates
+using MS-SSIM.
 
 </details>
 
 ### 1.2 한국어 요약
 
-이 논문은 nonlinear analysis transform, quantization, nonlinear synthesis transform으로 구성된 학습 기반 이미지 압축 구조를 제안한다.
+이 논문은 CNN 기반의 비선형 변환과 GDN 비선형성을 사용해 이미지 압축 모델을 end-to-end로 학습하는 방법을 제안한다. 
+양자화 때문에 직접 학습이 어려운 문제는 연속적인 근사 손실 함수로 해결하고, rate–distortion 기준으로 전체 모델을 최적화한다. 
+실험 결과, 제안 방법은 JPEG 및 JPEG 2000보다 우수한 압축 성능을 보였으며, 특히 낮은 비트레이트에서도 시각적 품질이 크게 향상되었다.
 
 ---
 
