@@ -1,10 +1,14 @@
+{% assign filter_category = include.category %}
+{% assign filter_tag = include.tag %}
+{% assign tag_title = include.tag_title %}
+
 <div class="paper-tag-page">
-  <h1>{{ page.filter_category }} / {{ page.tag_title }}</h1>
+  <h1>{{ filter_category }} / {{ tag_title }}</h1>
 
   {% assign matched_count = 0 %}
 
   {% for post in site.posts %}
-    {% if post.categories contains page.filter_category and post.tags contains page.filter_tag %}
+    {% if post.categories contains filter_category and post.tags contains filter_tag %}
       {% assign matched_count = matched_count | plus: 1 %}
 
       <article class="paper-list-item">
@@ -27,7 +31,6 @@
           <div class="paper-list-tags">
             <i class="fas fa-tags" aria-hidden="true"></i>
             <span>Tags:</span>
-
             {% for tag in post.tags %}
               <span class="paper-list-tag">{{ tag }}</span>
             {% endfor %}
@@ -38,8 +41,6 @@
   {% endfor %}
 
   {% if matched_count == 0 %}
-    <p class="paper-empty-message">
-      아직 이 태그에 해당하는 논문 리뷰가 없습니다.
-    </p>
+    <p class="paper-empty-message">아직 이 태그에 해당하는 논문 리뷰가 없습니다.</p>
   {% endif %}
 </div>
