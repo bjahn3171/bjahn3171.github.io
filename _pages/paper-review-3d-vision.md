@@ -5,4 +5,4 @@ layout: single
 author_profile: true
 ---
 
-{% include filterable-post-list.html filter_category="논문리뷰" initial_tag="3D Vision" %}
+{% include filterable-post-list.html filter_category="논문리뷰" initial_tag="3D Vision" compact_filter=true category_url="/paper-review/" %}
