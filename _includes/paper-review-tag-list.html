@@ -1,10 +1,11 @@
 {% assign filter_category = page.filter_category %}
 {% assign filter_tag = page.filter_tag %}
+{% assign sorted_posts = site.posts | sort: "date" | reverse %}
 
 <div class="paper-tag-page">
   {% assign matched_count = 0 %}
 
-  {% for post in site.posts %}
+  {% for post in sorted_posts %}
     {% if post.categories contains filter_category and post.tags contains filter_tag %}
       {% assign matched_count = matched_count | plus: 1 %}
 
@@ -18,9 +19,10 @@
           {{ post.date | date: "%Y년 %m월 %d일" }}
         </div>
 
-        {% if post.excerpt %}
-          <p class="paper-list-excerpt">
-            {{ post.excerpt | markdownify | strip_html | strip_newlines | truncate: 180 }}
+        {% assign summary_text = post.summary | default: post.excerpt %}
+        {% if summary_text %}
+          <p class="paper-list-summary">
+            {{ summary_text | markdownify | strip_html | strip_newlines }}
           </p>
         {% endif %}
 
