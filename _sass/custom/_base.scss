@@ -1,0 +1,41 @@
+body {
+  color: var(--bj-text);
+}
+
+a,
+.archive__item-title a,
+.page__title a {
+  color: var(--bj-accent);
+}
+
+a:hover,
+.archive__item-title a:hover,
+.page__title a:hover {
+  color: var(--bj-accent-dark);
+}
+
+.greedy-nav a {
+  color: #59616a;
+}
+
+.greedy-nav a:hover {
+  color: var(--bj-accent);
+}
+
+.greedy-nav .visible-links a:before {
+  background: var(--bj-accent);
+}
+
+.page__title {
+  font-size: 1.55rem;
+  line-height: 1.35;
+}
+
+.archive__item-title {
+  font-size: 1.15rem;
+}
+
+.page__content {
+  font-size: 0.9rem;
+  line-height: 1.75;
+}
