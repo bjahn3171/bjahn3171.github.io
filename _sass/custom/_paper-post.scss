@@ -53,3 +53,48 @@
   background: #f4fbfc;
   color: var(--bj-accent) !important;
 }
+
+/* Post page taxonomy tags - clipping fix */
+.page__taxonomy,
+.page__meta {
+  overflow: visible !important;
+}
+
+.post-page-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 1.2rem;
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.25rem;
+  line-height: 1.6;
+  overflow: visible !important;
+}
+
+.post-page-tag,
+.post-page-tag:visited,
+.post-page-tag:hover,
+.post-page-tag:focus,
+.post-page-tag:active {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 1.9rem;
+  padding: 0.31rem 0.72rem;
+  border: 1px solid #d2dce1;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #68737b !important;
+  line-height: 1.2;
+  text-decoration: none !important;
+  border-bottom: 1px solid #d2dce1 !important;
+  box-shadow: none !important;
+  overflow: visible;
+}
+
+.post-page-tag:hover {
+  border-color: rgba(47, 127, 143, 0.45) !important;
+  background: #f4fbfc;
+  color: var(--bj-accent) !important;
+}
