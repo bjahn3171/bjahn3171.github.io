@@ -51,3 +51,14 @@ a:hover,
     max-width: 1560px !important;
   }
 }
+
+@media (min-width: 1024px) {
+  .layout--single .page {
+    padding-right: 200px !important;
+  }
+
+  .layout--single .sidebar__right {
+    width: 200px !important;
+    margin-right: -200px !important;
+  }
+}
