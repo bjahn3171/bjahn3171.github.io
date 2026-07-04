@@ -1,5 +1,5 @@
 ---
-title: "논문리뷰 / 3D Vision"
+title: "논문리뷰 [3D Vision]"
 permalink: /paper-review/3d-vision/
 layout: single
 author_profile: true
