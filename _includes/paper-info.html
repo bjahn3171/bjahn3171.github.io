@@ -1,0 +1,26 @@
+{% if page.paper %}
+<div class="paper-info-box">
+  <p class="paper-info-line">
+    <strong>{{ page.paper.venue }} {{ page.paper.year }}.</strong>
+    {% for link in page.paper.links %}
+      {% if link.url and link.url != "" %}
+        <a href="{{ link.url }}">[{{ link.name }}]</a>
+      {% else %}
+        <span>[{{ link.name }}]</span>
+      {% endif %}
+    {% endfor %}
+  </p>
+
+  {% if page.paper.authors %}
+    <p>{{ page.paper.authors }}</p>
+  {% endif %}
+
+  {% if page.paper.affiliations %}
+    <p>{{ page.paper.affiliations }}</p>
+  {% endif %}
+
+  {% if page.paper.date %}
+    <p>{{ page.paper.date }}</p>
+  {% endif %}
+</div>
+{% endif %}
