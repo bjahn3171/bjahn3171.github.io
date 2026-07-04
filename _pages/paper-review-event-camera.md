@@ -1,5 +1,5 @@
 ---
-title: "논문리뷰 / Event Camera"
+title: "논문리뷰 [Event Camera]"
 permalink: /paper-review/event-camera/
 layout: single
 author_profile: true
