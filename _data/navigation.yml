@@ -7,3 +7,22 @@ main:
     url: /tags/
   - title: "About"
     url: /about/
+
+    paper_categories:
+  - title: "전체 게시글"
+    url: /posts/
+
+  - title: "논문리뷰"
+    children:
+      - title: "3D Vision"
+        url: /tags/#3d-vision
+      - title: "Video Coding"
+        url: /tags/#video-coding
+      - title: "Event Camera"
+        url: /tags/#event-camera
+
+  - title: "프로그래밍"
+    url: /categories/#implementation
+
+  - title: "공부"
+    url: /categories/#study
