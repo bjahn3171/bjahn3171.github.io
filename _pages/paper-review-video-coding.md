@@ -1,5 +1,5 @@
 ---
-title: "논문리뷰 / Video Coding"
+title: "논문리뷰 [Video Coding]"
 permalink: /paper-review/video-coding/
 layout: single
 author_profile: true
