@@ -1,38 +1,51 @@
 {% assign sorted_posts = site.posts | sort: "date" | reverse %}
 {% assign filter_category = include.filter_category | default: "" %}
 {% assign initial_tag = include.initial_tag | default: "" %}
+{% assign compact_filter = include.compact_filter | default: false %}
+{% assign category_url = include.category_url | default: "/paper-review/" %}
 
 <div
   id="postFilterRoot"
   class="filterable-post-list"
   data-initial-tag="{{ initial_tag | escape }}"
+  data-compact-filter="{{ compact_filter }}"
+  data-category-url="{{ category_url | relative_url }}"
 >
-  <div class="post-filter-panel">
-    <div class="post-filter-panel__top">
-      <span class="post-filter-panel__label">Filter posts</span>
-      <button id="clearAllFilters" class="post-filter-clear" type="button">
-        Clear
-      </button>
-    </div>
-
-    <div class="post-filter-search">
-      <i class="fas fa-search post-filter-search__icon" aria-hidden="true"></i>
-
+  {% if compact_filter %}
+    <div class="current-filter-bar">
+      <span class="current-filter-bar__label">현재 필터</span>
       <div id="selectedTagBox" class="selected-tag-box"></div>
 
-      <input
-        id="postTagSearch"
-        class="post-filter-input"
-        type="text"
-        placeholder="태그, 제목, 키워드 검색"
-        autocomplete="off"
-      >
+      <button id="clearAllFilters" class="current-filter-clear" type="button">
+        전체 논문리뷰
+      </button>
     </div>
+  {% else %}
+    <div class="post-filter-panel">
+      <div class="post-filter-toolbar">
+        <div class="post-filter-search">
+          <i class="fas fa-search post-filter-search__icon" aria-hidden="true"></i>
 
-    <div class="post-filter-hint">
-      글 아래 태그를 클릭하면 필터가 추가됩니다. 여러 태그를 동시에 선택할 수 있습니다.
+          <input
+            id="postTagSearch"
+            class="post-filter-input"
+            type="text"
+            placeholder="검색: 태그 / 제목 / 키워드"
+            autocomplete="off"
+          >
+        </div>
+
+        <button id="clearAllFilters" class="post-filter-clear" type="button">
+          초기화
+        </button>
+      </div>
+
+      <div class="selected-tag-row">
+        <span class="selected-tag-row__label">선택된 태그</span>
+        <div id="selectedTagBox" class="selected-tag-box"></div>
+      </div>
     </div>
-  </div>
+  {% endif %}
 
   <p class="all-posts-count">
     <span id="visiblePostCount">0</span> 개의 게시글이 있습니다.
@@ -110,6 +123,10 @@
     const root = document.getElementById("postFilterRoot");
     if (!root) return;
 
+    const compactFilter = root.dataset.compactFilter === "true";
+    const lockedTag = root.dataset.initialTag || "";
+    const categoryUrl = root.dataset.categoryUrl || "/paper-review/";
+
     const input = document.getElementById("postTagSearch");
     const selectedTagBox = document.getElementById("selectedTagBox");
     const items = Array.from(document.querySelectorAll(".all-post-item"));
@@ -135,22 +152,34 @@
       return splitQueryTags(params.get("tags"));
     }
 
+    function tagExists(tag) {
+      return selectedTags.some(function (t) {
+        return normalize(t) === normalize(tag);
+      });
+    }
+
+    function isLockedTag(tag) {
+      return compactFilter && lockedTag && normalize(tag) === normalize(lockedTag);
+    }
+
     function syncUrl() {
       const url = new URL(window.location.href);
 
-      if (selectedTags.length > 0) {
-        url.searchParams.set("tags", selectedTags.join(","));
+      let tagsForUrl = selectedTags;
+
+      if (compactFilter && lockedTag) {
+        tagsForUrl = selectedTags.filter(function (tag) {
+          return !isLockedTag(tag);
+        });
+      }
+
+      if (tagsForUrl.length > 0) {
+        url.searchParams.set("tags", tagsForUrl.join(","));
       } else {
         url.searchParams.delete("tags");
       }
 
       window.history.replaceState({}, "", url);
-    }
-
-    function tagExists(tag) {
-      return selectedTags.some(function (t) {
-        return normalize(t) === normalize(tag);
-      });
     }
 
     function addTag(tag, shouldSyncUrl) {
@@ -172,6 +201,8 @@
     }
 
     function removeTag(tag) {
+      if (isLockedTag(tag)) return;
+
       selectedTags = selectedTags.filter(function (t) {
         return normalize(t) !== normalize(tag);
       });
@@ -182,6 +213,11 @@
     }
 
     function clearAll() {
+      if (compactFilter) {
+        window.location.href = categoryUrl;
+        return;
+      }
+
       selectedTags = [];
       if (input) input.value = "";
 
@@ -197,29 +233,30 @@
         const chip = document.createElement("button");
         chip.type = "button";
         chip.className = "selected-tag-chip";
-        chip.setAttribute("aria-label", tag + " 필터 제거");
+
+        if (isLockedTag(tag)) {
+          chip.classList.add("is-locked");
+        }
 
         const text = document.createElement("span");
         text.className = "selected-tag-chip__text";
         text.textContent = tag;
 
-        const close = document.createElement("span");
-        close.className = "selected-tag-chip__x";
-        close.textContent = "×";
-
         chip.appendChild(text);
-        chip.appendChild(close);
 
-        chip.addEventListener("click", function () {
-          removeTag(tag);
-        });
+        if (!isLockedTag(tag)) {
+          const close = document.createElement("span");
+          close.className = "selected-tag-chip__x";
+          close.textContent = "×";
+          chip.appendChild(close);
+
+          chip.addEventListener("click", function () {
+            removeTag(tag);
+          });
+        }
 
         selectedTagBox.appendChild(chip);
       });
-
-      if (clearButton) {
-        clearButton.style.display = selectedTags.length ? "inline-flex" : "none";
-      }
     }
 
     function updateActiveTagButtons() {
@@ -275,14 +312,11 @@
       clearButton.addEventListener("click", clearAll);
     }
 
-    const initialTag = root.dataset.initialTag;
-    const urlTags = readTagsFromUrl();
-
-    if (initialTag) {
-      addTag(initialTag, false);
+    if (lockedTag) {
+      addTag(lockedTag, false);
     }
 
-    urlTags.forEach(function (tag) {
+    readTagsFromUrl().forEach(function (tag) {
       addTag(tag, false);
     });
 
