@@ -1,9 +1,11 @@
 {% assign sorted_posts = site.posts | sort: "date" | reverse %}
 {% assign filter_category = include.filter_category | default: "" %}
 {% assign initial_tag = include.initial_tag | default: "" %}
-{% assign compact_filter = include.compact_filter | default: false %}
-{% assign category_url = include.category_url | default: "/paper-review/" %}
 
+{% assign show_filter = true %}
+{% if include.show_filter == false %}
+  {% assign show_filter = false %}
+{% endif %}
 <div
   id="postFilterRoot"
   class="filterable-post-list"
