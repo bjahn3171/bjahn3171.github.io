@@ -30,3 +30,26 @@
 .paper-summary-box p {
   margin: 0.3rem 0;
 }
+
+/* Post page taxonomy tags */
+.post-page-tags {
+  margin-top: 1.2rem;
+  margin-bottom: 0.8rem;
+}
+
+.post-page-tag,
+.post-page-tag:visited,
+.post-page-tag:hover,
+.post-page-tag:focus,
+.post-page-tag:active {
+  text-decoration: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+.post-page-tag:hover {
+  transform: translateY(-1px);
+  border-color: rgba(47, 127, 143, 0.45);
+  background: #f4fbfc;
+  color: var(--bj-accent) !important;
+}
