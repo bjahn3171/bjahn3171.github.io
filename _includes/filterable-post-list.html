@@ -13,41 +13,34 @@
   data-compact-filter="{{ compact_filter }}"
   data-category-url="{{ category_url | relative_url }}"
 >
-  {% if compact_filter %}
-    <div class="current-filter-bar">
-      <span class="current-filter-bar__label">현재 필터</span>
-      <div id="selectedTagBox" class="selected-tag-box"></div>
+  {% if show_filter %}
+  <div class="post-filter-panel">
+    <div class="post-filter-toolbar">
+      <div class="post-filter-search">
+        <i class="fas fa-search post-filter-search__icon" aria-hidden="true"></i>
 
-      <button id="clearAllFilters" class="current-filter-clear" type="button">
-        전체 논문리뷰
+        <input
+          id="postTagSearch"
+          class="post-filter-input"
+          type="text"
+          placeholder="검색: 태그 / 제목 / 키워드"
+          autocomplete="off"
+        >
+      </div>
+
+      <button id="clearAllFilters" class="post-filter-clear" type="button">
+        초기화
       </button>
     </div>
-  {% else %}
-    <div class="post-filter-panel">
-      <div class="post-filter-toolbar">
-        <div class="post-filter-search">
-          <i class="fas fa-search post-filter-search__icon" aria-hidden="true"></i>
 
-          <input
-            id="postTagSearch"
-            class="post-filter-input"
-            type="text"
-            placeholder="검색: 태그 / 제목 / 키워드"
-            autocomplete="off"
-          >
-        </div>
-
-        <button id="clearAllFilters" class="post-filter-clear" type="button">
-          초기화
-        </button>
-      </div>
-
-      <div class="selected-tag-row">
-        <span class="selected-tag-row__label">선택된 태그</span>
-        <div id="selectedTagBox" class="selected-tag-box"></div>
-      </div>
+    <div class="selected-tag-row">
+      <span class="selected-tag-row__label">선택된 태그</span>
+      <div id="selectedTagBox" class="selected-tag-box"></div>
     </div>
-  {% endif %}
+  </div>
+{% else %}
+  <div id="selectedTagBox" hidden></div>
+{% endif %}
 
   <p class="all-posts-count">
     <span id="visiblePostCount">0</span> 개의 게시글이 있습니다.
