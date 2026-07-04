@@ -40,3 +40,14 @@ a:hover,
   font-size: 0.9rem;
   line-height: 1.75;
 }
+
+/* ===============================
+   Global layout width tuning
+   =============================== */
+
+@media (min-width: 1024px) {
+  .masthead__inner-wrap,
+  #main {
+    max-width: 1560px !important;
+  }
+}
