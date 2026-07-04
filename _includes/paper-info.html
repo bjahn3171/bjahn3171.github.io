@@ -2,11 +2,10 @@
 <div class="paper-info-box">
   <p class="paper-info-line">
     <strong>{{ page.paper.venue }} {{ page.paper.year }}.</strong>
+
     {% for link in page.paper.links %}
       {% if link.url and link.url != "" %}
-        <a href="{{ link.url }}">[{{ link.name }}]</a>
-      {% else %}
-        <span>[{{ link.name }}]</span>
+        <a href="{{ link.url }}" target="_blank" rel="noopener">[{{ link.name }}]</a>
       {% endif %}
     {% endfor %}
   </p>
