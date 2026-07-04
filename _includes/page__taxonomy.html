@@ -1,0 +1,16 @@
+{% if page.tags.size > 0 %}
+  <div class="paper-list-tags post-page-tags">
+    <i class="fas fa-tags paper-list-tags__icon" aria-hidden="true"></i>
+    <span class="paper-list-tags__label">Tags:</span>
+
+    {% for tag in page.tags %}
+      <a
+        class="paper-list-tag post-page-tag"
+        href="{{ '/paper-review/' | relative_url }}?tags={{ tag | cgi_escape }}"
+        rel="tag"
+      >
+        {{ tag }}
+      </a>
+    {% endfor %}
+  </div>
+{% endif %}
