@@ -189,3 +189,48 @@ a:hover,
   font-size: 0.82em;
   color: #9aa1a8;
 }
+
+/* ===============================
+   Paper post components
+   =============================== */
+
+.paper-info-box {
+  margin: 1.5rem 0 2rem 0;
+  padding: 0.25rem 0 0.25rem 1.1rem;
+  border-left: 5px solid #7a858e;
+  color: #434a50;
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+.paper-info-box p {
+  margin: 0.15rem 0;
+}
+
+.paper-info-box a {
+  margin-left: 0.25rem;
+  color: #2f7f8f;
+  font-weight: 500;
+}
+
+.paper-summary-box {
+  margin: 1.5rem 0;
+  padding: 1rem 1.1rem;
+  border-left: 5px solid #2f7f8f;
+  background: #f7f9fa;
+  color: #434a50;
+  font-size: 0.92rem;
+  line-height: 1.75;
+}
+
+.paper-summary-box p {
+  margin: 0.3rem 0;
+}
+
+.paper-check-list {
+  margin: 1rem 0;
+  padding: 1rem 1.1rem;
+  background: #fafafa;
+  border: 1px solid #e7eaee;
+  border-radius: 6px;
+}
