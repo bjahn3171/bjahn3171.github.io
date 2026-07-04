@@ -1,0 +1,76 @@
+/* Author profile */
+
+.author__avatar img {
+  max-width: 120px;
+}
+
+.author__name {
+  font-size: 1.05rem;
+  line-height: 1.3;
+}
+
+.author__bio {
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--bj-muted);
+}
+
+.author__urls-wrapper {
+  font-size: 0.78rem;
+}
+
+/* Sidebar category menu */
+
+.paper-sidebar {
+  margin-top: 1.4rem;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  word-break: keep-all;
+}
+
+.paper-sidebar a {
+  text-decoration: none !important;
+}
+
+.paper-sidebar__item {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  color: #666f77 !important;
+}
+
+.paper-sidebar__item:hover {
+  color: var(--bj-accent) !important;
+}
+
+.paper-sidebar__section {
+  padding: 0.55rem 0;
+  border-bottom: 1px solid #e8e8e8;
+  font-weight: 700;
+  color: #555d64 !important;
+}
+
+.paper-sidebar__children {
+  display: flex;
+  flex-direction: column;
+  gap: 0.22rem;
+  padding: 0.55rem 0 0.75rem 0.15rem;
+}
+
+.paper-sidebar__children .paper-sidebar__item {
+  font-size: 0.70rem;
+  font-weight: 400;
+}
+
+.paper-sidebar__label {
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.paper-sidebar__count {
+  flex: 0 0 auto;
+  margin-left: 0.35rem;
+  font-size: 0.82em;
+  color: var(--bj-light-muted);
+}
