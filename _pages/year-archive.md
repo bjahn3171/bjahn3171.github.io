@@ -5,4 +5,4 @@ layout: single
 author_profile: true
 ---
 
-{% include all-posts-list.html %}
+{% include filterable-post-list.html %}
