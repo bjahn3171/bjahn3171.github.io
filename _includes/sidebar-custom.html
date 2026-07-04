@@ -1,0 +1,48 @@
+{% assign total_count = site.posts | size %}
+{% assign paper_count = site.categories['논문리뷰'] | size %}
+{% assign programming_count = site.categories['프로그래밍'] | size %}
+{% assign study_count = site.categories['공부'] | size %}
+
+<nav class="paper-sidebar">
+  <a class="paper-sidebar__section" href="{{ '/posts/' | relative_url }}">
+    <span>전체 게시글</span>
+    <span class="paper-sidebar__count">({{ total_count }})</span>
+  </a>
+
+  <a class="paper-sidebar__section" href="{{ '/categories/' | relative_url }}">
+    <span>논문리뷰</span>
+    <span class="paper-sidebar__count">({{ paper_count }})</span>
+  </a>
+
+  <div class="paper-sidebar__children">
+    <a href="{{ '/tags/#3d-vision' | relative_url }}">
+      <span>3D Vision</span>
+      <span class="paper-sidebar__count">({{ site.tags['3D Vision'] | size }})</span>
+    </a>
+
+    <a href="{{ '/tags/#video-coding' | relative_url }}">
+      <span>Video Coding</span>
+      <span class="paper-sidebar__count">({{ site.tags['Video Coding'] | size }})</span>
+    </a>
+
+    <a href="{{ '/tags/#event-camera' | relative_url }}">
+      <span>Event Camera</span>
+      <span class="paper-sidebar__count">({{ site.tags['Event Camera'] | size }})</span>
+    </a>
+
+    <a href="{{ '/tags/#gaussian-splatting' | relative_url }}">
+      <span>Gaussian Splatting</span>
+      <span class="paper-sidebar__count">({{ site.tags['Gaussian Splatting'] | size }})</span>
+    </a>
+  </div>
+
+  <a class="paper-sidebar__section" href="{{ '/categories/' | relative_url }}">
+    <span>프로그래밍</span>
+    <span class="paper-sidebar__count">({{ programming_count }})</span>
+  </a>
+
+  <a class="paper-sidebar__section" href="{{ '/categories/' | relative_url }}">
+    <span>공부</span>
+    <span class="paper-sidebar__count">({{ study_count }})</span>
+  </a>
+</nav>
