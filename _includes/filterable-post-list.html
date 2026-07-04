@@ -3,44 +3,44 @@
 {% assign initial_tag = include.initial_tag | default: "" %}
 
 {% assign show_filter = true %}
-{% if include.show_filter == false %}
+{% if include.show_filter == false or include.show_filter == "false" %}
   {% assign show_filter = false %}
 {% endif %}
+
 <div
   id="postFilterRoot"
-  class="filterable-post-list"
+  class="filterable-post-list{% unless show_filter %} is-filter-hidden{% endunless %}"
   data-initial-tag="{{ initial_tag | escape }}"
-  data-compact-filter="{{ compact_filter }}"
-  data-category-url="{{ category_url | relative_url }}"
+  data-show-filter="{{ show_filter }}"
 >
   {% if show_filter %}
-  <div class="post-filter-panel">
-    <div class="post-filter-toolbar">
-      <div class="post-filter-search">
-        <i class="fas fa-search post-filter-search__icon" aria-hidden="true"></i>
+    <div class="post-filter-panel">
+      <div class="post-filter-toolbar">
+        <div class="post-filter-search">
+          <i class="fas fa-search post-filter-search__icon" aria-hidden="true"></i>
 
-        <input
-          id="postTagSearch"
-          class="post-filter-input"
-          type="text"
-          placeholder="검색: 태그 / 제목 / 키워드"
-          autocomplete="off"
-        >
+          <input
+            id="postTagSearch"
+            class="post-filter-input"
+            type="text"
+            placeholder="검색: 태그 / 제목 / 키워드"
+            autocomplete="off"
+          >
+        </div>
+
+        <button id="clearAllFilters" class="post-filter-clear" type="button">
+          초기화
+        </button>
       </div>
 
-      <button id="clearAllFilters" class="post-filter-clear" type="button">
-        초기화
-      </button>
+      <div class="selected-tag-row">
+        <span class="selected-tag-row__label">선택된 태그</span>
+        <div id="selectedTagBox" class="selected-tag-box"></div>
+      </div>
     </div>
-
-    <div class="selected-tag-row">
-      <span class="selected-tag-row__label">선택된 태그</span>
-      <div id="selectedTagBox" class="selected-tag-box"></div>
-    </div>
-  </div>
-{% else %}
-  <div id="selectedTagBox" hidden></div>
-{% endif %}
+  {% else %}
+    <div id="selectedTagBox" hidden></div>
+  {% endif %}
 
   <p class="all-posts-count">
     <span id="visiblePostCount">0</span> 개의 게시글이 있습니다.
@@ -52,6 +52,12 @@
 
       {% if filter_category and filter_category != "" %}
         {% unless post.categories contains filter_category %}
+          {% assign use_post = false %}
+        {% endunless %}
+      {% endif %}
+
+      {% if show_filter == false and initial_tag and initial_tag != "" %}
+        {% unless post.tags contains initial_tag %}
           {% assign use_post = false %}
         {% endunless %}
       {% endif %}
@@ -118,9 +124,8 @@
     const root = document.getElementById("postFilterRoot");
     if (!root) return;
 
-    const compactFilter = root.dataset.compactFilter === "true";
-    const lockedTag = root.dataset.initialTag || "";
-    const categoryUrl = root.dataset.categoryUrl || "/paper-review/";
+    const showFilter = root.dataset.showFilter !== "false";
+    const initialTag = root.dataset.initialTag || "";
 
     const input = document.getElementById("postTagSearch");
     const selectedTagBox = document.getElementById("selectedTagBox");
@@ -147,34 +152,24 @@
       return splitQueryTags(params.get("tags"));
     }
 
-    function tagExists(tag) {
-      return selectedTags.some(function (t) {
-        return normalize(t) === normalize(tag);
-      });
-    }
-
-    function isLockedTag(tag) {
-      return compactFilter && lockedTag && normalize(tag) === normalize(lockedTag);
-    }
-
     function syncUrl() {
+      if (!showFilter) return;
+
       const url = new URL(window.location.href);
 
-      let tagsForUrl = selectedTags;
-
-      if (compactFilter && lockedTag) {
-        tagsForUrl = selectedTags.filter(function (tag) {
-          return !isLockedTag(tag);
-        });
-      }
-
-      if (tagsForUrl.length > 0) {
-        url.searchParams.set("tags", tagsForUrl.join(","));
+      if (selectedTags.length > 0) {
+        url.searchParams.set("tags", selectedTags.join(","));
       } else {
         url.searchParams.delete("tags");
       }
 
       window.history.replaceState({}, "", url);
+    }
+
+    function tagExists(tag) {
+      return selectedTags.some(function (t) {
+        return normalize(t) === normalize(tag);
+      });
     }
 
     function addTag(tag, shouldSyncUrl) {
@@ -196,8 +191,6 @@
     }
 
     function removeTag(tag) {
-      if (isLockedTag(tag)) return;
-
       selectedTags = selectedTags.filter(function (t) {
         return normalize(t) !== normalize(tag);
       });
@@ -208,12 +201,8 @@
     }
 
     function clearAll() {
-      if (compactFilter) {
-        window.location.href = categoryUrl;
-        return;
-      }
-
       selectedTags = [];
+
       if (input) input.value = "";
 
       renderSelectedTags();
@@ -222,6 +211,8 @@
     }
 
     function renderSelectedTags() {
+      if (!selectedTagBox) return;
+
       selectedTagBox.innerHTML = "";
 
       selectedTags.forEach(function (tag) {
@@ -229,26 +220,20 @@
         chip.type = "button";
         chip.className = "selected-tag-chip";
 
-        if (isLockedTag(tag)) {
-          chip.classList.add("is-locked");
-        }
-
         const text = document.createElement("span");
         text.className = "selected-tag-chip__text";
         text.textContent = tag;
 
+        const close = document.createElement("span");
+        close.className = "selected-tag-chip__x";
+        close.textContent = "×";
+
         chip.appendChild(text);
+        chip.appendChild(close);
 
-        if (!isLockedTag(tag)) {
-          const close = document.createElement("span");
-          close.className = "selected-tag-chip__x";
-          close.textContent = "×";
-          chip.appendChild(close);
-
-          chip.addEventListener("click", function () {
-            removeTag(tag);
-          });
-        }
+        chip.addEventListener("click", function () {
+          removeTag(tag);
+        });
 
         selectedTagBox.appendChild(chip);
       });
@@ -264,7 +249,9 @@
 
     function updateList() {
       const textQuery = normalize(input ? input.value : "");
-      const textTokens = textQuery.split(/[\s,]+/).filter(Boolean);
+      const textTokens = showFilter
+        ? textQuery.split(/[\s,]+/).filter(Boolean)
+        : [];
 
       let visible = 0;
 
@@ -295,6 +282,7 @@
 
     tagButtons.forEach(function (button) {
       button.addEventListener("click", function () {
+        if (!showFilter) return;
         addTag(button.dataset.tag);
       });
     });
@@ -307,13 +295,15 @@
       clearButton.addEventListener("click", clearAll);
     }
 
-    if (lockedTag) {
-      addTag(lockedTag, false);
+    if (initialTag) {
+      addTag(initialTag, false);
     }
 
-    readTagsFromUrl().forEach(function (tag) {
-      addTag(tag, false);
-    });
+    if (showFilter) {
+      readTagsFromUrl().forEach(function (tag) {
+        addTag(tag, false);
+      });
+    }
 
     renderSelectedTags();
     updateList();
