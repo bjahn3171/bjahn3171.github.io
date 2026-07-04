@@ -1,0 +1,133 @@
+---
+# Only the main Sass file needs front matter
+---
+
+@charset "utf-8";
+
+@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}";
+@import "minimal-mistakes";
+
+/* ===============================
+   BJ custom style
+   =============================== */
+
+:root {
+  --bj-accent: #2f7f8f;
+  --bj-accent-dark: #1f5f6c;
+  --bj-text: #4f565c;
+  --bj-muted: #70777d;
+  --bj-light-muted: #9aa1a8;
+  --bj-border: #e7eaee;
+}
+
+/* 전체 글자 색 */
+body {
+  color: var(--bj-text);
+}
+
+/* 링크 색 */
+a,
+.archive__item-title a,
+.page__title a {
+  color: var(--bj-accent);
+}
+
+a:hover,
+.archive__item-title a:hover,
+.page__title a:hover {
+  color: var(--bj-accent-dark);
+}
+
+/* 상단 메뉴 */
+.greedy-nav a {
+  color: #59616a;
+}
+
+.greedy-nav a:hover {
+  color: var(--bj-accent);
+}
+
+.greedy-nav .visible-links a:before {
+  background: var(--bj-accent);
+}
+
+/* 왼쪽 프로필 */
+.author__avatar img {
+  max-width: 120px;
+}
+
+.author__name {
+  font-size: 1.05rem;
+  line-height: 1.3;
+}
+
+.author__bio {
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--bj-muted);
+}
+
+.author__urls-wrapper {
+  font-size: 0.78rem;
+}
+
+/* 왼쪽 카테고리 메뉴 */
+.paper-sidebar {
+  margin-top: 1.4rem;
+  font-size: 0.82rem;
+}
+
+.paper-sidebar a {
+  text-decoration: none;
+  color: var(--bj-muted);
+}
+
+.paper-sidebar a:hover {
+  color: var(--bj-accent);
+}
+
+.paper-sidebar__section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--bj-border);
+  font-weight: 700;
+  color: var(--bj-text);
+}
+
+.paper-sidebar__children {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.65rem 0 0.85rem 0;
+}
+
+.paper-sidebar__children a {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.74rem;
+  font-weight: 400;
+  color: var(--bj-muted);
+}
+
+.paper-sidebar__count {
+  margin-left: 0.35rem;
+  font-size: 0.8em;
+  color: var(--bj-light-muted);
+}
+
+/* 본문 글자 크기 */
+.page__title {
+  font-size: 1.55rem;
+  line-height: 1.35;
+}
+
+.archive__item-title {
+  font-size: 1.15rem;
+}
+
+.page__content {
+  font-size: 0.9rem;
+  line-height: 1.75;
+}
