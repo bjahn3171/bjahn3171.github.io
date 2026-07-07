@@ -14,6 +14,7 @@ tags:
   - IEEE 802.11
   - Video Streaming
   - QoS
+  - Video Coding
 
 layout: single
 author_profile: true
