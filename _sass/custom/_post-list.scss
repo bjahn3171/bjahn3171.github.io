@@ -4,12 +4,16 @@
 }
 
 .paper-list-title {
-  margin-bottom: 0.55rem;
+  margin-bottom: 0.7rem;
   font-size: 0.95rem;
-  line-height: 1.55;
+  line-height: 1.35;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 .paper-list-title a {
+  display: inline-block;
+  line-height: 1.35 !important;
   color: var(--bj-accent) !important;
   text-decoration: none !important;
 }
