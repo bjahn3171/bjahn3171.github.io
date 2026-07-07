@@ -164,6 +164,10 @@ Wi-Fi는 IEEE 802.11be(Wi-Fi 7)를 표현하는 이산 사건 시뮬레이터로
 
 ### 2. Main Results
 
+<figure class="paper-figure paper-figure--wide">
+  <img src="{{ '/assets/images/paper_review/vr-wifi/exp_a.png' | relative_url }}" alt="VR Wi-Fi streaming framework overview">
+</figure>
+
 **(A) GoP 크기·IR·비트레이트의 영향 (단일 HMD, AP로부터 1.5 m, 90 FPS)**
 
 - IR은 GoP 대비 프레임 크기와 VF-RTT 변동성을 크게 줄이지만, 중복성 증가로 인해 VMAF는 약간 낮아진다.
@@ -172,6 +176,10 @@ Wi-Fi는 IEEE 802.11be(Wi-Fi 7)를 표현하는 이산 사건 시뮬레이터로
 - 흥미롭게도, 80 Mbps IR 스트림은 40 Mbps GoP 스트림과 유사한 VF-RTT 분산과 VMAF 범위를 보인다.
 - **권고**: 지연 안정성을 위해 낮은 비트레이트의 GoP보다는 **높은 비트레이트의 IR**을 우선하는 것이 바람직하다.
 
+<figure class="paper-figure paper-figure--wide">
+  <img src="{{ '/assets/images/paper_review/vr-wifi/exp_b.png' | relative_url }}" alt="VR Wi-Fi streaming framework overview">
+</figure>
+
 **(B) VR 사용자 수 증가의 영향 (*snow*, CBR 100 Mbps, 1.5 m)**
 
 - FLR은 사용자 3명까지는 1% 미만으로 유지된다.
@@ -179,6 +187,10 @@ Wi-Fi는 IEEE 802.11be(Wi-Fi 7)를 표현하는 이산 사건 시뮬레이터로
 - 따라서 **4명**이 100 Mbps CBR 스트림 기준 QoS를 유지할 수 있는 한계 사용자 수이다.
 - IR은 일관되게 더 낮은 VF-RTT 분산을 보이지만, 채널 포화는 코덱·FPS 선택과 무관하게 4명 지점에서 발생한다.
 - 높은 FPS는 전송 빈도가 늘어 CU를 증가시키며, 5~6명에서는 네트워크 혼잡으로 인해 오히려 더 큰 A-MPDU 전송이 발생해 CU가 감소하기 시작한다.
+
+<figure class="paper-figure paper-figure--wide">
+  <img src="{{ '/assets/images/paper_review/vr-wifi/exp_c.png' | relative_url }}" alt="VR Wi-Fi streaming framework overview">
+</figure>
 
 **(C) AP-HMD 거리 및 이질적 MCS의 영향 (두 사용자)**
 
@@ -191,7 +203,7 @@ Wi-Fi는 IEEE 802.11be(Wi-Fi 7)를 표현하는 이산 사건 시뮬레이터로
 핵심 관찰은 성능 저하가 **개별 사용자에 국한되지 않는다**는 점이다. 한 사용자의 열악한 채널 조건(먼 거리, 낮은 MCS)이 큐잉 지연을 통해 전체 네트워크의 다른 사용자에게까지 전파된다. 이는 실제 다중 사용자 VR 배치에서 최악 조건 사용자가 전체 QoS의 병목이 될 수 있음을 시사한다.
 
 
-## 6. Discussion
+## Discussion
 
 ### 1. 장점
 
