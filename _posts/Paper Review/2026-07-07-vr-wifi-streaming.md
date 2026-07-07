@@ -46,7 +46,7 @@ paper:
 </div>
 
 <figure class="paper-figure paper-figure--wide">
-  <img src="{{ '/assets/images/paper_review/vr-wifi/front.png' | relative_url }}" alt="VR Wi-Fi streaming framework overview">
+  <img src="{{ '/assets/images/paper_review/vr-wifi/model_overview.png' | relative_url }}" alt="VR Wi-Fi streaming framework overview">
 </figure>
 
 ## Abstract / 요약
