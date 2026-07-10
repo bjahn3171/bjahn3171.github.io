@@ -1,13 +1,19 @@
 :root {
-  --bj-accent: #0884a6; // 페이지 제목 색
-  --bj-accent-dark: #1f5f6c;
-  --bj-text: #f5f7f5;
-  --bj-muted: #70777d;
-  --bj-light-muted: #9aa1a8;
-  --bj-border: #e7eaee;
-  --bj-bg-soft: #f7f9fa;
+  /* Accent */
+  --bj-accent: #65d6ee;        /* 제목, 링크, 강조색 */
+  --bj-accent-dark: #9beafe;   /* hover 색 */
 
-    /* Background */
-  --bj-page-bg: #87888a;
-  --bj-surface-bg: #ffffff;
+  /* Text */
+  --bj-text: #f3f6f8;          /* 본문 글자 */
+  --bj-muted: #d4d9df;         /* 날짜, 설명, sidebar 보조 글자 */
+  --bj-light-muted: #b4bcc5;   /* count, 약한 보조 글자 */
+
+  /* Border / soft background */
+  --bj-border: #6d7278;
+  --bj-bg-soft: #777b80;       /* TL;DR 박스 배경 */
+
+  /* Background */
+  --bj-page-bg: #87888a;       /* 전체 배경 */
+  --bj-surface-bg: #74777c;    /* 태그, TOC, 표면 박스 */
+  --bj-card-bg: #666b71;       /* 더 진한 카드/TOC header */
 }
