@@ -101,6 +101,13 @@ a:hover,
   font-weight: 500;
 }
 
+.layout--single .page__content .subsection h4::before {
+  content: "▸";
+  margin-right: 0.4rem;
+  color: #7a8288;
+  font-weight: 700;
+}
+
 .subsection {
     margin-left: 1.2rem;
 }
