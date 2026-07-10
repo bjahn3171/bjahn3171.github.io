@@ -93,6 +93,8 @@ a:hover,
 .layout--single .page__content h4 {
   margin-top: 1.2rem;
   margin-bottom: 0.45rem;
+  margin-left: 1rem;  /* 왼쪽으로 한 단계 들여쓰기 */
+
   color: #4f565c;
   font-size: 0.9rem;
   line-height: 0.8;
