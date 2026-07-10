@@ -90,24 +90,31 @@ a:hover,
   font-weight: 550;
 }
 
-.layout--single .page__content h4 {
+.layout--single .page__content .subsection h4 {
+  display: flex;
+  align-items: baseline;
+
   margin-top: 1.2rem;
   margin-bottom: 0.45rem;
-  margin-left: 1rem;  /* 왼쪽으로 한 단계 들여쓰기 */
+  margin-left: 0;
 
   color: #4f565c;
   font-size: 0.9rem;
-  line-height: 0.8;
+  line-height: 1.3;
   font-weight: 500;
 }
 
 .layout--single .page__content .subsection h4::before {
-  content: "▸";
-  margin-right: 0.4rem;
+  content: "▶";
+  flex: 0 0 1.4rem;
+  width: 1.4rem;
+
   color: #7a8288;
   font-weight: 700;
+  text-align: center;
 }
 
-.subsection {
-    margin-left: 1.2rem;
+.layout--single .page__content .subsection {
+  padding-left: 1.2rem;
 }
+
