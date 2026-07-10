@@ -117,3 +117,28 @@ a:hover,
 .layout--single .page__content .subsection {
   padding-left: 1.2rem;
 }
+
+/* ===============================
+   Background color
+   =============================== */
+
+html,
+body {
+  background-color: var(--bj-page-bg) !important;
+}
+
+.masthead,
+.masthead__inner-wrap,
+.greedy-nav {
+  background-color: var(--bj-page-bg) !important;
+}
+
+.initial-content,
+#main {
+  background-color: var(--bj-page-bg) !important;
+}
+
+.page,
+.archive {
+  background-color: transparent;
+}
