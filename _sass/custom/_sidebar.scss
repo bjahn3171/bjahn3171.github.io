@@ -1,4 +1,6 @@
-/* Author profile */
+/* ===============================
+   Author profile
+   =============================== */
 
 .author__avatar img {
   max-width: 120px;
@@ -7,19 +9,42 @@
 .author__name {
   font-size: 1.05rem;
   line-height: 1.3;
+  color: var(--bj-sidebar-heading) !important;
 }
 
 .author__bio {
   font-size: 0.78rem;
   line-height: 1.6;
-  color: var(--bj-muted);
+  color: var(--bj-sidebar-text) !important;
+  opacity: 1 !important;
 }
 
 .author__urls-wrapper {
   font-size: 0.78rem;
+  color: var(--bj-sidebar-text) !important;
 }
 
-/* Sidebar category menu */
+.author__urls,
+.author__urls li,
+.author__urls a {
+  color: var(--bj-sidebar-text) !important;
+  opacity: 1 !important;
+}
+
+.author__urls i,
+.author__urls svg {
+  color: var(--bj-sidebar-muted) !important;
+  fill: var(--bj-sidebar-muted) !important;
+  opacity: 1 !important;
+}
+
+.author__urls a:hover {
+  color: var(--bj-accent) !important;
+}
+
+/* ===============================
+   Sidebar category menu
+   =============================== */
 
 .paper-sidebar {
   margin-top: 1.4rem;
@@ -37,7 +62,8 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  color: #666f77 !important;
+  color: var(--bj-sidebar-text) !important;
+  opacity: 1 !important;
 }
 
 .paper-sidebar__item:hover {
@@ -46,9 +72,9 @@
 
 .paper-sidebar__section {
   padding: 0.55rem 0;
-  border-bottom: 1px solid #e8e8e8;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.42);
   font-weight: 700;
-  color: #555d64 !important;
+  color: var(--bj-sidebar-heading) !important;
 }
 
 .paper-sidebar__children {
@@ -61,6 +87,11 @@
 .paper-sidebar__children .paper-sidebar__item {
   font-size: 0.70rem;
   font-weight: 400;
+  color: var(--bj-sidebar-muted) !important;
+}
+
+.paper-sidebar__children .paper-sidebar__item:hover {
+  color: var(--bj-accent) !important;
 }
 
 .paper-sidebar__label {
@@ -72,5 +103,6 @@
   flex: 0 0 auto;
   margin-left: 0.35rem;
   font-size: 0.82em;
-  color: var(--bj-light-muted);
+  color: var(--bj-light-muted) !important;
+  opacity: 1 !important;
 }
