@@ -1,19 +1,19 @@
 <div class="softargmin-widget">
-  <svg class="softargmin-svg" viewBox="0 0 760 360" role="img" preserveAspectRatio="xMidYMid meet">
+  <svg class="softargmin-svg" viewBox="0 0 760 300" role="img" preserveAspectRatio="xMidYMid meet">
     <title>Interactive unimodal distribution whose sharpness changes with sigma</title>
     <desc>A single peak centered at the true disparity; a slider adjusts how sharp or flat it is.</desc>
 
     <!-- axes -->
-    <line x1="80" y1="275" x2="700" y2="275" class="softargmin-axis"/>
-    <line x1="90" y1="45" x2="90" y2="285" class="softargmin-axis"/>
+    <line x1="115" y1="225" x2="700" y2="225" class="softargmin-axis"/>
+    <line x1="125" y1="45" x2="125" y2="235" class="softargmin-axis"/>
 
     <!-- labels -->
-    <text class="softargmin-text" x="700" y="305" text-anchor="end">disparity d</text>
-    <text class="softargmin-text" x="86" y="35" text-anchor="end">probability P(d)</text>
+    <text class="softargmin-text" x="125" y="35" text-anchor="start">probability P(d)</text>
+    <text class="softargmin-text" x="700" y="255" text-anchor="end">disparity d</text>
 
     <!-- true disparity guide -->
-    <line x1="390" y1="60" x2="390" y2="275" class="softargmin-guide"/>
-    <text class="softargmin-text softargmin-true" x="390" y="325" text-anchor="middle">true disparity</text>
+    <line x1="410" y1="55" x2="410" y2="225" class="softargmin-guide"/>
+    <text class="softargmin-text softargmin-true" x="410" y="275" text-anchor="middle">true disparity</text>
 
     <!-- curve -->
     <path class="softargmin-peak" d=""/>
@@ -38,11 +38,11 @@
     const label = widget.querySelector(".softargmin-label");
 
     function draw(s) {
-      const cx = 390;
-      const base = 275;
-      const top = 60;
+      const cx = 410;
+      const base = 225;
+      const top = 55;
       const N = 160;
-      const spread = 300;
+      const spread = 290;
       const pts = [];
 
       for (let i = -N; i <= N; i++) {
