@@ -1,0 +1,38 @@
+<div style="padding:0.5rem 0">
+<svg width="100%" viewBox="0 0 680 300" role="img">
+<title>Interactive unimodal distribution whose sharpness changes with sigma</title>
+<desc>A single peak centered at the true disparity; a slider adjusts how sharp or flat it is.</desc>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<line x1="60" y1="230" x2="640" y2="230" class="arr" stroke="var(--t)"/>
+<line x1="70" y1="40" x2="70" y2="235" class="arr" stroke="var(--t)"/>
+<text class="ts" x="638" y="252" text-anchor="end">disparity d</text>
+<text class="ts" x="62" y="38" text-anchor="end">probability P(d)</text>
+<line x1="350" y1="50" x2="350" y2="230" stroke="var(--b)" stroke-width="0.5" stroke-dasharray="3 3"/>
+<text class="ts" x="350" y="270" text-anchor="middle" fill="var(--s)">true disparity</text>
+<path id="peak" d="" fill="none" stroke="#1D9E75" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+<div style="display:flex;align-items:center;gap:16px;margin-top:10px;font-size:13px;color:var(--text-secondary)">
+<span>sharp</span>
+<input type="range" id="sig" min="8" max="90" value="24" style="flex:1" oninput="draw(this.value)">
+<span>flat</span>
+<span id="lbl" style="min-width:70px;text-align:right;color:var(--text-primary)">σ = small</span>
+</div>
+</div>
+<script>
+function draw(s){
+  const cx=350, base=230, top=50, N=140, spread=280;
+  let pts=[];
+  for(let i=-N;i<=N;i++){
+    const d=i/N*spread;
+    const y=Math.exp(-(Math.abs(d))/ (s));
+    pts.push([cx+d, base-(base-top)*y]);
+  }
+  const path=pts.map((p,i)=>(i===0?'M':'L')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+  document.getElementById('peak').setAttribute('d',path);
+  const v=+s;
+  document.getElementById('lbl').textContent = v<20?'σ small (sharp)':v<55?'σ medium':'σ large (flat)';
+}
+draw(24);
+</script>
