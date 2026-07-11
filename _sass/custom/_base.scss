@@ -174,29 +174,45 @@ body {
 }
 
 /* ===============================
-   Right TOC - original behavior, dark colors only
+   Right TOC - keep original behavior, recolor, hide h4
    =============================== */
 
 .sidebar__right {
   background: transparent !important;
 }
 
-/* Keep Minimal Mistakes default sizing and scrollspy behavior */
+/* Outer TOC box */
 .toc {
+  padding: 0 !important;
+  margin-top: 0 !important;
+
   background: var(--bj-surface-bg) !important;
-  border-color: var(--bj-border) !important;
+  border: 1px solid rgba(255, 255, 255, 0.55) !important;
+  border-radius: 4px !important;
+  overflow: hidden !important;
+
+  box-shadow: none !important;
 }
 
 /* "On this page" header */
 .toc .nav__title {
+  margin: 0 !important;
+  padding: 0.45rem 0.6rem !important;
+
   background: var(--bj-card-bg) !important;
   color: var(--bj-heading) !important;
+
+  border-radius: 0 !important;
+  font-weight: 800 !important;
 }
 
 /* Menu body */
 .toc__menu {
+  margin: 0 !important;
+  padding: 0 !important;
+
   background: var(--bj-surface-bg) !important;
-  border-color: var(--bj-border) !important;
+  border: none !important;
 }
 
 /* Normal TOC links */
@@ -234,17 +250,7 @@ body {
   border-left: 3px solid var(--bj-accent) !important;
 }
 
-/* Do not brighten entire active section children */
-.toc__menu li ul a {
-  background: transparent !important;
-  color: var(--bj-muted) !important;
-}
-
-/* Restore active color after generic nested rule */
-.toc__menu li ul .active > a,
-.toc__menu li ul a.active,
-.toc__menu li ul li.active > a,
-.toc__menu li ul a[aria-current="true"] {
-  background: #f3f4f6 !important;
-  color: #111827 !important;
+/* Hide h4 and deeper levels from right TOC */
+.toc__menu ul ul {
+  display: none !important;
 }
