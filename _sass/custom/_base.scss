@@ -200,9 +200,60 @@ body {
 }
 
 /* ===============================
-   Right TOC active item contrast
+   Right TOC styling
    =============================== */
 
+.sidebar__right,
+.toc {
+  background: transparent !important;
+}
+
+/* TOC outer box */
+.toc {
+  padding: 0 !important;
+  margin-top: 0 !important;
+  border: 1px solid rgba(255, 255, 255, 0.75) !important;
+  border-radius: 6px !important;
+  overflow: hidden !important;
+  background: var(--bj-surface-bg) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
+}
+
+/* "On this page" header */
+.toc .nav__title {
+  margin: 0 !important;
+  padding: 0.7rem 0.85rem !important;
+  border-radius: 0 !important;
+  background: var(--bj-card-bg) !important;
+  color: var(--bj-heading) !important;
+  font-weight: 800 !important;
+}
+
+/* TOC menu body */
+.toc__menu {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: var(--bj-surface-bg) !important;
+  border: none !important;
+}
+
+/* Normal TOC links */
+.toc__menu a {
+  display: block;
+  padding: 0.45rem 0.75rem !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.45);
+  color: var(--bj-muted) !important;
+  background: transparent !important;
+  line-height: 1.45;
+  opacity: 1 !important;
+}
+
+.toc__menu a:hover {
+  color: var(--bj-accent) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Active item itself */
 .toc__menu .active > a,
 .toc__menu a.active,
 .toc__menu li.active > a,
@@ -210,13 +261,39 @@ body {
 .toc__menu a[aria-current="true"] {
   background: #f3f4f6 !important;
   color: #111827 !important;
-  font-weight: 700 !important;
+  font-weight: 800 !important;
+  border-left: 4px solid var(--bj-accent) !important;
 }
 
-.toc__menu .active > a:hover,
-.toc__menu a.active:hover,
-.toc__menu li.active > a:hover,
-.toc__menu [aria-current="true"]:hover,
-.toc__menu a[aria-current="true"]:hover {
+/* Active section's children */
+.toc__menu li.active ul,
+.toc__menu li.active ul li,
+.toc__menu li.active ul a,
+.toc__menu li:has(> a.active) ul,
+.toc__menu li:has(> a.active) ul li,
+.toc__menu li:has(> a.active) ul a {
+  background: #e5e7eb !important;
+  color: #111827 !important;
+  opacity: 1 !important;
+}
+
+/* Active section's child hover */
+.toc__menu li.active ul a:hover,
+.toc__menu li:has(> a.active) ul a:hover {
+  background: #d1d5db !important;
   color: #000000 !important;
+}
+
+/* Nested indentation */
+.toc__menu ul {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.toc__menu ul a {
+  padding-left: 1.35rem !important;
+}
+
+.toc__menu ul ul a {
+  padding-left: 2rem !important;
 }
