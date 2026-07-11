@@ -198,3 +198,25 @@ body {
 .toc__menu a:hover {
   color: var(--bj-accent) !important;
 }
+
+/* ===============================
+   Right TOC active item contrast
+   =============================== */
+
+.toc__menu .active > a,
+.toc__menu a.active,
+.toc__menu li.active > a,
+.toc__menu [aria-current="true"],
+.toc__menu a[aria-current="true"] {
+  background: #f3f4f6 !important;
+  color: #111827 !important;
+  font-weight: 700 !important;
+}
+
+.toc__menu .active > a:hover,
+.toc__menu a.active:hover,
+.toc__menu li.active > a:hover,
+.toc__menu [aria-current="true"]:hover,
+.toc__menu a[aria-current="true"]:hover {
+  color: #000000 !important;
+}
