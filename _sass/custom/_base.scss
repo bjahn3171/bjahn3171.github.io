@@ -1,3 +1,177 @@
+body {
+  color: var(--bj-text);
+}
+
+a,
+.archive__item-title a,
+.page__title a {
+  color: var(--bj-accent);
+}
+
+a:hover,
+.archive__item-title a:hover,
+.page__title a:hover {
+  color: var(--bj-accent-dark);
+}
+
+.greedy-nav a {
+  color: var(--bj-muted) !important;
+}
+
+.greedy-nav a:hover {
+  color: var(--bj-accent) !important;
+}
+
+.greedy-nav .visible-links a:before {
+  background: var(--bj-accent);
+}
+
+.page__title {
+  font-size: 1.28rem;
+  line-height: 1.35;
+  color: var(--bj-accent);
+}
+
+.archive__item-title {
+  font-size: 1.15rem;
+}
+
+.page__content {
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--bj-text);
+}
+
+.page__content p,
+.page__content li {
+  color: var(--bj-text);
+}
+
+/* ===============================
+   Global layout width tuning
+   =============================== */
+
+@media (min-width: 1024px) {
+  .masthead__inner-wrap,
+  #main {
+    max-width: 1560px !important;
+  }
+
+  /* Post page: keep TOC, but give more width to content */
+  .layout--single .page {
+    padding-right: 200px !important;
+  }
+
+  .layout--single .sidebar__right {
+    width: 200px !important;
+    margin-right: -200px !important;
+  }
+
+  /* Archive / list pages */
+  .layout--archive .archive,
+  .layout--home .archive,
+  .layout--categories .archive,
+  .layout--tags .archive {
+    padding-right: 0 !important;
+  }
+}
+
+/* ===============================
+   Post heading hierarchy
+   =============================== */
+
+.layout--single .page__content h2 {
+  margin-top: 2.1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid rgba(242, 200, 121, 0.45);
+  color: #ffd98a;
+  font-size: 1.2rem;
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+.layout--single .page__content h3 {
+  margin-top: 1.6rem;
+  margin-bottom: 0.65rem;
+  color: #f8fafc;
+  font-size: 0.98rem;
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+.layout--single .page__content h4 {
+  margin-top: 1.2rem;
+  margin-bottom: 0.45rem;
+  color: #ffe3a3;
+  font-size: 0.9rem;
+  line-height: 1.3;
+  font-weight: 650;
+}
+
+/* ===============================
+   Custom subsection heading
+   Usage:
+   <div class="subsection" markdown="1">
+   #### 제목
+   ...
+   </div>
+   =============================== */
+
+.layout--single .page__content .subsection {
+  padding-left: 1.2rem;
+}
+
+.layout--single .page__content .subsection h4 {
+  display: flex;
+  align-items: baseline;
+
+  margin-top: 1.2rem;
+  margin-bottom: 0.45rem;
+  margin-left: 0;
+
+  color: #f8fafc;
+  font-size: 0.9rem;
+  line-height: 1.3;
+  font-weight: 650;
+}
+
+.layout--single .page__content .subsection h4::before {
+  content: "▶";
+  flex: 0 0 1.4rem;
+  width: 1.4rem;
+
+  color: #ffd98a;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* ===============================
+   Background color
+   =============================== */
+
+html,
+body {
+  background-color: var(--bj-page-bg) !important;
+  color: var(--bj-text);
+}
+
+.masthead,
+.masthead__inner-wrap,
+.greedy-nav {
+  background-color: var(--bj-page-bg) !important;
+}
+
+.initial-content,
+#main {
+  background-color: var(--bj-page-bg) !important;
+}
+
+.page,
+.archive {
+  background-color: transparent !important;
+}
+
 /* ===============================
    Right TOC - compact dark style
    =============================== */
@@ -7,7 +181,7 @@
   background: transparent !important;
 }
 
-/* TOC outer box: keep compact */
+/* TOC outer box: compact */
 .toc {
   padding: 0 !important;
   margin-top: 0 !important;
@@ -56,7 +230,7 @@
   background: rgba(255, 255, 255, 0.06) !important;
 }
 
-/* Active item: only active row becomes light + black text */
+/* Active item: active row becomes light + black text */
 .toc__menu .active > a,
 .toc__menu a.active,
 .toc__menu li.active > a,
