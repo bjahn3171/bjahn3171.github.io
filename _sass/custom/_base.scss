@@ -15,11 +15,11 @@ a:hover,
 }
 
 .greedy-nav a {
-  color: #59616a;
+  color: var(--bj-muted) !important;
 }
 
 .greedy-nav a:hover {
-  color: var(--bj-accent);
+  color: var(--bj-accent) !important;
 }
 
 .greedy-nav .visible-links a:before {
@@ -39,6 +39,12 @@ a:hover,
 .page__content {
   font-size: 0.78rem;
   line-height: 1.6;
+  color: var(--bj-text);
+}
+
+.page__content p,
+.page__content li {
+  color: var(--bj-text);
 }
 
 /* ===============================
@@ -70,24 +76,50 @@ a:hover,
   }
 }
 
+/* ===============================
+   Post heading hierarchy
+   =============================== */
+
 .layout--single .page__content h2 {
   margin-top: 2.1rem;
   margin-bottom: 1rem;
   padding-bottom: 0.45rem;
-  border-bottom: 1px solid #eeeeee;
-  color: #4f565c;
+  border-bottom: 1px solid var(--bj-border);
+  color: var(--bj-heading);
   font-size: 1.2rem;
-  line-height: 0.8;
+  line-height: 1.25;
   font-weight: 700;
 }
 
 .layout--single .page__content h3 {
   margin-top: 1.6rem;
   margin-bottom: 0.65rem;
-  color: #4f565c;
+  color: var(--bj-heading);
   font-size: 0.98rem;
-  line-height: 0.8;
+  line-height: 1.25;
   font-weight: 700;
+}
+
+.layout--single .page__content h4 {
+  margin-top: 1.2rem;
+  margin-bottom: 0.45rem;
+  color: var(--bj-heading);
+  font-size: 0.9rem;
+  line-height: 1.3;
+  font-weight: 650;
+}
+
+/* ===============================
+   Custom subsection heading
+   Usage:
+   <div class="subsection" markdown="1">
+   #### 제목
+   ...
+   </div>
+   =============================== */
+
+.layout--single .page__content .subsection {
+  padding-left: 1.2rem;
 }
 
 .layout--single .page__content .subsection h4 {
@@ -98,7 +130,7 @@ a:hover,
   margin-bottom: 0.45rem;
   margin-left: 0;
 
-  color: #4f565c;
+  color: var(--bj-heading);
   font-size: 0.9rem;
   line-height: 1.3;
   font-weight: 650;
@@ -109,13 +141,9 @@ a:hover,
   flex: 0 0 1.4rem;
   width: 1.4rem;
 
-  color: #7a8288;
+  color: var(--bj-accent);
   font-weight: 700;
   text-align: center;
-}
-
-.layout--single .page__content .subsection {
-  padding-left: 1.2rem;
 }
 
 /* ===============================
@@ -125,6 +153,7 @@ a:hover,
 html,
 body {
   background-color: var(--bj-page-bg) !important;
+  color: var(--bj-text);
 }
 
 .masthead,
@@ -140,5 +169,32 @@ body {
 
 .page,
 .archive {
-  background-color: transparent;
+  background-color: transparent !important;
+}
+
+/* ===============================
+   Right TOC
+   =============================== */
+
+.sidebar__right,
+.toc {
+  background: transparent !important;
+}
+
+.toc .nav__title {
+  background: var(--bj-card-bg) !important;
+  color: var(--bj-heading) !important;
+}
+
+.toc__menu {
+  background: var(--bj-surface-bg) !important;
+  border-color: var(--bj-border) !important;
+}
+
+.toc__menu a {
+  color: var(--bj-muted) !important;
+}
+
+.toc__menu a:hover {
+  color: var(--bj-accent) !important;
 }
