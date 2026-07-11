@@ -174,47 +174,32 @@ body {
 }
 
 /* ===============================
-   Right TOC - compact box with internal scroll
+   Right TOC - original behavior, dark colors only
    =============================== */
 
-.sidebar__right,
-.toc {
+.sidebar__right {
   background: transparent !important;
 }
 
-/* Outer TOC box */
+/* Keep Minimal Mistakes default sizing and scrollspy behavior */
 .toc {
-  padding: 0 !important;
-  margin-top: 0 !important;
-  border: 1px solid rgba(255, 255, 255, 0.55) !important;
-  border-radius: 4px !important;
-  overflow: hidden !important;
   background: var(--bj-surface-bg) !important;
-  box-shadow: none !important;
+  border-color: var(--bj-border) !important;
 }
 
 /* "On this page" header */
 .toc .nav__title {
-  margin: 0 !important;
-  padding: 0.45rem 0.6rem !important;
-  border-radius: 0 !important;
   background: var(--bj-card-bg) !important;
   color: var(--bj-heading) !important;
-  font-weight: 800 !important;
 }
 
-/* Scroll only inside the menu body */
+/* Menu body */
 .toc__menu {
-  margin: 0 !important;
-  padding: 0 !important;
-  max-height: 58vh !important;
-  overflow-y: auto !important;
-  overflow-x: hidden !important;
   background: var(--bj-surface-bg) !important;
-  border: none !important;
+  border-color: var(--bj-border) !important;
 }
 
-/* Normal TOC links: keep original compact size */
+/* Normal TOC links */
 .toc__menu a {
   color: var(--bj-muted) !important;
   background: transparent !important;
@@ -226,7 +211,7 @@ body {
   background: rgba(255, 255, 255, 0.06) !important;
 }
 
-/* Active item */
+/* Active item only */
 .toc__menu .active > a,
 .toc__menu a.active,
 .toc__menu li.active > a,
@@ -238,16 +223,28 @@ body {
   border-left: 3px solid var(--bj-accent) !important;
 }
 
-/* Children of active section */
-.toc__menu li.active ul a,
-.toc__menu li:has(> a.active) ul a {
-  background: #e5e7eb !important;
+/* Nested active item only */
+.toc__menu li ul .active > a,
+.toc__menu li ul a.active,
+.toc__menu li ul li.active > a,
+.toc__menu li ul a[aria-current="true"] {
+  background: #f3f4f6 !important;
   color: #111827 !important;
-  opacity: 1 !important;
+  font-weight: 800 !important;
+  border-left: 3px solid var(--bj-accent) !important;
 }
 
-.toc__menu li.active ul a:hover,
-.toc__menu li:has(> a.active) ul a:hover {
-  background: #d1d5db !important;
-  color: #000000 !important;
+/* Do not brighten entire active section children */
+.toc__menu li ul a {
+  background: transparent !important;
+  color: var(--bj-muted) !important;
+}
+
+/* Restore active color after generic nested rule */
+.toc__menu li ul .active > a,
+.toc__menu li ul a.active,
+.toc__menu li ul li.active > a,
+.toc__menu li ul a[aria-current="true"] {
+  background: #f3f4f6 !important;
+  color: #111827 !important;
 }
