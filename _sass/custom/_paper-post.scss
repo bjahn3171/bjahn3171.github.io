@@ -98,3 +98,44 @@
   background: #f4fbfc;
   color: var(--bj-accent) !important;
 }
+
+/* ===============================
+   Markdown table style for dark theme
+   =============================== */
+
+.page__content table {
+  width: 100%;
+  margin: 1rem 0 1.5rem 0;
+  border-collapse: collapse;
+  color: var(--bj-text) !important;
+  background: transparent !important;
+  font-size: 0.72rem;
+}
+
+.page__content table thead {
+  background: var(--bj-card-bg) !important;
+}
+
+.page__content table th {
+  padding: 0.55rem 0.65rem;
+  border-bottom: 1px solid var(--bj-border);
+  color: var(--bj-heading) !important;
+  background: var(--bj-card-bg) !important;
+  font-weight: 700;
+  text-align: left;
+}
+
+.page__content table td {
+  padding: 0.55rem 0.65rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.28);
+  color: var(--bj-text) !important;
+  background: transparent !important;
+}
+
+.page__content table tr {
+  background: transparent !important;
+}
+
+.page__content table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.06) !important;
+}
