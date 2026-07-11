@@ -139,3 +139,74 @@
 .page__content table tbody tr:hover {
   background: rgba(255, 255, 255, 0.06) !important;
 }
+
+/* ===============================
+   Interactive soft-argmin widget
+   =============================== */
+
+.softargmin-widget {
+  width: 100%;
+  margin: 1.4rem 0 1.8rem 0;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--bj-border);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.softargmin-svg {
+  display: block;
+  width: 100%;
+  min-height: 300px;
+}
+
+.softargmin-axis {
+  stroke: var(--bj-muted);
+  stroke-width: 1.5;
+}
+
+.softargmin-guide {
+  stroke: var(--bj-light-muted);
+  stroke-width: 1.2;
+  stroke-dasharray: 5 5;
+}
+
+.softargmin-peak {
+  fill: none;
+  stroke: var(--bj-accent);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.softargmin-text {
+  fill: var(--bj-text);
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.softargmin-true {
+  fill: var(--bj-muted);
+  font-size: 16px;
+}
+
+.softargmin-control {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: 0.7rem;
+  color: var(--bj-text);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.softargmin-control input[type="range"] {
+  flex: 1;
+  min-width: 180px;
+}
+
+.softargmin-label {
+  min-width: 8rem;
+  text-align: right;
+  color: var(--bj-accent);
+  font-weight: 800;
+}
